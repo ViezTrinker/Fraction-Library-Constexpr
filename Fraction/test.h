@@ -128,6 +128,14 @@ inline void RuntimeTests(void)
 	{
 		throw std::runtime_error("Test 4 Fail");
 	}
+
+	FractionU32 Frac7{ 7, 77 };
+	constexpr FractionU32 Frac8{ 77, 7 };
+	Frac7.Invert();
+	if (Frac7 != Frac8)
+	{
+		throw std::runtime_error("Test 5 Fail");
+	}
 }
 
 #endif // TEST_H

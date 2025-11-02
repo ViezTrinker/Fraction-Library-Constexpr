@@ -37,6 +37,8 @@ public:
 		_denominator = _denominator / greatestCommonDivisor;
 	}
 
+	// -------------- OPERATORS -------------- //
+	
 	constexpr Fraction operator+(const Fraction& other) const
 	{
 		T numerator = _numerator * other._denominator + _denominator * other._numerator;
@@ -121,6 +123,15 @@ public:
 		return temp;
 	}
 
+	// -------------- CONVERSIONS -------------- //
+
+	constexpr void Invert(void)
+	{
+		T temp = _numerator;
+		_numerator = _denominator;
+		_denominator = temp;
+	}
+	
 	constexpr double ToDouble(void) const
 	{
 		return static_cast<double>(_numerator) / static_cast<double>(_denominator);
@@ -140,6 +151,8 @@ public:
 		return buffer;
 	}
 	
+	// -------------- GETTER -------------- //
+
 	constexpr T GetNumerator(void) const
 	{
 		return _numerator;
