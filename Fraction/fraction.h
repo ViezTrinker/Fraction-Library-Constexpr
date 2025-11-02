@@ -1,13 +1,15 @@
 #ifndef FRACTION_H
 #define FRACTION_H
 
+#include <algorithm>
 #include <array>
+#include <concepts>
 #include <numeric>
 #include <stdexcept>
 #include <string>
 #include <type_traits>
 
-template<typename T>
+template<std::integral T>
 class Fraction
 {
 public:
@@ -84,7 +86,7 @@ public:
 
 	constexpr bool operator>=(const Fraction& other) const
 	{
-		return _numerator * other._denominator >= other._numerator * _denominator;
+		return !(*this < other);
 	}
 
 	constexpr bool operator<(const Fraction& other) const
@@ -94,7 +96,7 @@ public:
 
 	constexpr bool operator<=(const Fraction& other) const
 	{
-		return _numerator * other._denominator <= other._numerator * _denominator;
+		return !(*this > other);
 	}
 
 	constexpr Fraction& operator++(void)
@@ -123,13 +125,44 @@ public:
 		return temp;
 	}
 
+	constexpr Fraction& operator+=(const Fraction& other)
+	{
+		*this = *this + other;
+		return *this;
+	}
+
+	constexpr Fraction& operator-=(const Fraction& other)
+	{
+		*this = *this - other;
+		return *this;
+	}
+
+	constexpr Fraction& operator*=(const Fraction& other)
+	{
+		*this = *this * other;
+		return *this;
+	}
+
+	constexpr Fraction& operator/=(const Fraction& other)
+	{
+		*this = *this / other;
+		return *this;
+	}
+
+	friend std::ostream& operator<<(std::ostream& os, const Fraction& fraction)
+	{
+		return os << fraction._numerator << '/' << fraction._denominator;
+	}
+
 	// -------------- CONVERSIONS -------------- //
 
 	constexpr void Invert(void)
 	{
-		T temp = _numerator;
-		_numerator = _denominator;
-		_denominator = temp;
+		if (_numerator == 0)
+		{
+			throw std::domain_error("Cannot invert a fraction with zero numerator");
+		}
+		std::swap(_numerator, _denominator);
 	}
 	
 	constexpr double ToDouble(void) const
@@ -144,11 +177,7 @@ public:
 
 	constexpr std::string ToString(void) const
 	{
-		std::string buffer;
-		buffer.append(std::to_string(_numerator));
-		buffer.append("/");
-		buffer.append(std::to_string(_denominator));
-		return buffer;
+		return std::to_string(_numerator) + "/" + std::to_string(_denominator);
 	}
 	
 	// -------------- GETTER -------------- //
