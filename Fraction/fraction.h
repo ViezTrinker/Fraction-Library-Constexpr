@@ -13,7 +13,8 @@ template<std::integral T>
 class Fraction
 {
 public:
-	constexpr Fraction(const T numerator, const T denominator = 1) : _numerator(numerator), _denominator(denominator)
+	// -------------- CONSTRUCTORS -------------- //
+	constexpr Fraction(const T numerator, const T denominator) : _numerator(numerator), _denominator(denominator)
 	{	
 		if constexpr(std::is_signed<T>::value)
 		{
@@ -37,6 +38,17 @@ public:
 		T greatestCommonDivisor = std::gcd(_numerator, _denominator);
 		_numerator = _numerator / greatestCommonDivisor;
 		_denominator = _denominator / greatestCommonDivisor;
+	}
+
+	constexpr Fraction(const T numerator) :
+		Fraction(numerator, 1)
+	{
+	}
+
+	// Mixed fraction constructor for freaks
+	constexpr Fraction(const T wholeNumber, const T numerator, const T denominator) :
+				Fraction(wholeNumber * denominator + numerator, denominator) 
+	{ 
 	}
 
 	// -------------- OPERATORS -------------- //

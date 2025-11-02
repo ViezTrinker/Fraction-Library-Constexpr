@@ -94,6 +94,10 @@ inline constexpr FractionS32 Frac14{ 1, 101 };
 inline constexpr FractionS32 Frac15 = Frac14;
 static_assert(Frac14 == Frac15);
 
+inline constexpr FractionU32 Frac16{ 3, 4, 5 };
+inline constexpr FractionU32 Frac17{ 19, 5 };
+static_assert(Frac16 == Frac17);
+
 inline void RuntimeTests(void)
 {
 	Fraction frac1{ 4,5 };
