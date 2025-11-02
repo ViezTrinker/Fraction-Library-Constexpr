@@ -136,6 +136,15 @@ inline void RuntimeTests(void)
 	{
 		throw std::runtime_error("Test 5 Fail");
 	}
+
+	FractionU32 Frac9{ 10, 11 };
+	constexpr FractionU32 Frac10{ 13, 16 };
+	Frac9.SetNumerator(13);
+	Frac9.SetDenominator(16);
+	if (Frac9 != Frac10)
+	{
+		throw std::runtime_error("Test 6 Fail");
+	}
 }
 
 #endif // TEST_H

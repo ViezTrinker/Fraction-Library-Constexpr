@@ -163,6 +163,18 @@ public:
 		return _denominator;
 	}
 
+	// -------------- SETTER -------------- //
+
+	constexpr void SetNumerator(T numerator)
+	{
+		_numerator = numerator;
+	}
+
+	constexpr void SetDenominator(T denominator)
+	{
+		_denominator = denominator;
+	}
+
 private:
 	T _numerator;
 	T _denominator;
