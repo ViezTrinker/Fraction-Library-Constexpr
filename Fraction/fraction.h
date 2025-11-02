@@ -130,6 +130,15 @@ public:
 	{
 		return static_cast<float>(_numerator) / static_cast<float>(_denominator);
 	}
+
+	constexpr std::string ToString(void) const
+	{
+		std::string buffer;
+		buffer.append(std::to_string(_numerator));
+		buffer.append("/");
+		buffer.append(std::to_string(_denominator));
+		return buffer;
+	}
 	
 	constexpr T GetNumerator(void) const
 	{

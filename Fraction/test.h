@@ -90,8 +90,8 @@ inline constexpr FractionS32 Frac13{ -3, 10 };
 static_assert(Frac13.ToDouble() == -0.3);
 static_assert(Frac13.ToFloat() == -0.3f);
 
-inline constexpr FractionU32 Frac14{ 1, 101 };
-inline constexpr FractionU32 Frac15 = Frac14;
+inline constexpr FractionS32 Frac14{ 1, 101 };
+inline constexpr FractionS32 Frac15 = Frac14;
 static_assert(Frac14 == Frac15);
 
 inline void RuntimeTests(void)
@@ -105,6 +105,7 @@ inline void RuntimeTests(void)
 		throw std::runtime_error("Test 1 Fail");
 	}
 
+
 	/////////////////////////////////////////////////////////
 
 	Fraction frac3{ 1,4 };
@@ -114,6 +115,18 @@ inline void RuntimeTests(void)
 	if (frac3 != frac4)
 	{
 		throw std::runtime_error("Test 2 Fail");
+	}
+
+	constexpr Fraction frac5{ -3, 45 };
+	if (frac5.ToString() != "-1/15")
+	{
+		throw std::runtime_error("Test 3 Fail");
+	}
+
+	constexpr Fraction frac6{ 0, 7 };
+	if (frac6.ToString() != "0/1")
+	{
+		throw std::runtime_error("Test 4 Fail");
 	}
 }
 
