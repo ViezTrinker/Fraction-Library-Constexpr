@@ -100,7 +100,7 @@ public:
 		return static_cast<double>(_numerator) / static_cast<double>(_denominator);
 	}
 
-	constexpr double ToFloat(void) const
+	constexpr float ToFloat(void) const
 	{
 		return static_cast<float>(_numerator) / static_cast<float>(_denominator);
 	}
