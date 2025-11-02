@@ -95,6 +95,32 @@ public:
 		return _numerator * other._denominator <= other._numerator * _denominator;
 	}
 
+	constexpr Fraction& operator++(void)
+	{
+		_numerator += _denominator;
+		return *this;
+	}
+
+	constexpr Fraction operator++(int32_t)
+	{
+		Fraction temp = *this;
+		++(*this);
+		return temp;
+	}
+
+	constexpr Fraction& operator--(void)
+	{
+		_numerator -= _denominator;
+		return *this;
+	}
+
+	constexpr Fraction operator--(int32_t)
+	{
+		Fraction temp = *this;
+		--(*this);
+		return temp;
+	}
+
 	constexpr double ToDouble(void) const
 	{
 		return static_cast<double>(_numerator) / static_cast<double>(_denominator);
